@@ -1,20 +1,24 @@
-import Config  from "./src/Config";
-import DiscordConnector from "./src/DiscordConnector";
-import { ExpressApp } from "./src/ExpressApp";
-import SqliteDBotDao from "./src/dataaccess/SqliteDBotDao";
-import DefaultDBotService from "./src/service/DefaultDBotService";
+import Config from "./src/Config";
 import DBotController from "./src/controller/DBotController";
 import DBotDao from "./src/dataaccess/DBotDao";
+import PostgresDBotDao from "./src/dataaccess/PostgresDBotDao";
+import SqliteDBotDao from "./src/dataaccess/SqliteDBotDao";
+import { DB } from "./src/Database";
+import DiscordConnector from "./src/DiscordConnector";
+import { ExpressApp } from "./src/ExpressApp";
+import { DatabaseType } from "./src/model/DatabaseType";
 import DBotService from "./src/service/DBotService";
+import DefaultDBotService from "./src/service/DefaultDBotService";
 
 class App {
 	private dbotDao: DBotDao;
 	private dbotService: DBotService;
 	private dbotController: DBotController;
 
-	constructor() {
+	public start() {
 		this.loadServices();
 		this.connectToDiscord();
+		this.connectToDatabase();
 	}
 
 	private connectToDiscord() {
@@ -23,7 +27,7 @@ class App {
 		const discordConnector = new DiscordConnector(Config.discordToken);
 		discordConnector.connect();
 		discordConnector.onMessageReceived({
-			onMessageReceived: message => {
+			onMessageReceived: (message) => {
 				console.log("Received Message( " + message.username + "): " + message.content);
 
 				service.addMessage(message, {
@@ -33,11 +37,11 @@ class App {
 
 					onError: (error: Error) => {
 						console.log(error);
-					}
+					},
 				});
-			}
+			},
 		}).onVoiceActivityChanged({
-			onVoiceEventReceived: voiceEvent => {
+			onVoiceEventReceived: (voiceEvent) => {
 				console.log("Voice Event (" + voiceEvent.username + "): " + voiceEvent.event);
 				service.addVoiceActivity(voiceEvent, {
 					onData: () => {
@@ -46,14 +50,24 @@ class App {
 
 					onError: (error: Error) => {
 						console.log(error);
-					}
+					},
 				});
-			}
+			},
 		});
 	}
 
 	private loadServices() {
-		this.dbotDao = new SqliteDBotDao();
+		if (Config.database.type === DatabaseType.Postgresql) {
+			this.dbotDao = new PostgresDBotDao();
+		}
+		else if (Config.database.type === DatabaseType.Sqlite) {
+			this.dbotDao = new SqliteDBotDao();
+		}
+		else {
+			console.log("Unknown database type");
+			return;
+		}
+
 		this.dbotService = new DefaultDBotService(this.dbotDao);
 		this.dbotController = new DBotController(this.dbotService);
 
@@ -61,6 +75,10 @@ class App {
 			console.log(`Listening on port ${Config.port}`);
 		});
 	}
+
+	private connectToDatabase() {
+		DB.init();
+	}
 }
 
-new App();
+new App().start();

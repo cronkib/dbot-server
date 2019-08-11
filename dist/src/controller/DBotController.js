@@ -20,6 +20,7 @@ class DBotController extends ExpressController_1.default {
                     res.send(messages);
                 },
                 onError: (error) => {
+                    console.log(error);
                     res.status(500).send(error);
                 }
             });
@@ -32,6 +33,7 @@ class DBotController extends ExpressController_1.default {
                     res.send(messages);
                 },
                 onError: (error) => {
+                    console.log(error);
                     res.status(500).send(error);
                 }
             });

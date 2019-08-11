@@ -13,7 +13,7 @@ export default class DBotController extends ExpressController {
 			.done();
 	}
 
-	getMessages(dbotService: DBotService) {
+	public getMessages(dbotService: DBotService) {
 		return (req: express.Request, res: express.Response): any => {
 			dbotService.getAllMessages({
 				onData: (messages: MessageActivity[]): void => {
@@ -21,13 +21,14 @@ export default class DBotController extends ExpressController {
 				},
 
 				onError: (error: Error): void => {
+					console.log(error);
 					res.status(500).send(error);
 				}
 			});
 		};
 	}
 
-	getVoiceActivities(dbotService: DBotService) {
+	public getVoiceActivities(dbotService: DBotService) {
 		return (req: express.Request, res: express.Response): any => {
 			dbotService.getAllVoiceActivities({
 				onData: (messages: VoiceActivity[]): void => {
@@ -35,6 +36,7 @@ export default class DBotController extends ExpressController {
 				},
 
 				onError: (error: Error): void => {
+					console.log(error);
 					res.status(500).send(error);
 				}
 			});

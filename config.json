@@ -1,4 +1,13 @@
 {
 	"discordToken": "NTY5MzM2MjIzOTcwMjMwMjg4.XLvMqg.CbxYNY1IUtpUHmpy-huxG0hoOrg",
-	"port": 3000
+	"port": 3000,
+	"database": {
+		"type": "postgresql",
+		"user": "dbot",
+		"host": "forge",
+		"database": "dbot",
+		"password": "dbot",
+		"port": 5432,
+		"path": ""
+	}
 }
