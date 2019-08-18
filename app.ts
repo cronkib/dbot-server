@@ -1,17 +1,17 @@
 import Config from "./src/Config";
 import DBotController from "./src/controller/DBotController";
-import DBotDao from "./src/dataaccess/DBotDao";
+import IDBotDao from "./src/dataaccess/IDBotDao";
 import PostgresDBotDao from "./src/dataaccess/PostgresDBotDao";
 import SqliteDBotDao from "./src/dataaccess/SqliteDBotDao";
 import { DB } from "./src/Database";
 import DiscordConnector from "./src/DiscordConnector";
 import { ExpressApp } from "./src/ExpressApp";
 import { DatabaseType } from "./src/model/DatabaseType";
-import DBotService from "./src/service/DBotService";
+import DBotService from "./src/service/IDBotService";
 import DefaultDBotService from "./src/service/DefaultDBotService";
 
 class App {
-	private dbotDao: DBotDao;
+	private dbotDao: IDBotDao;
 	private dbotService: DBotService;
 	private dbotController: DBotController;
 

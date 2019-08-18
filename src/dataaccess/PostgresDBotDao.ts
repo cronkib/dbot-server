@@ -1,15 +1,15 @@
 import { PoolClient, QueryResult } from "pg";
 import { DB } from "../Database";
 import { MessageActivity, VoiceActivity } from "../domain/ActivityModels";
-import DBotDao, { AddRecordCallback, RecordsCallback } from "./DBotDao";
+import IDBotDao, { IAddRecordCallback, IRecordsCallback } from "./IDBotDao";
 
 const addMessageSql = " insert into main.message_activity_log ( content, channel, username ) values ( $1, $2, $3 ) ";
 const getAllMessagesSql = "select id, content, channel, username, insert_timestamp from main.message_activity_log";
 const addVoiceActivitySql = " insert into main.voice_activity_log ( username, channel, event ) values ( $1, $2, $3 ) ";
 const getAllVoiceActivitiesSql = "select id, username, insert_timestamp, event, channel from main.voice_activity_log";
 
-export default class PostgresDBotDao implements DBotDao {
-	public addMessageActivity(message: MessageActivity, callback: AddRecordCallback): void {
+export default class PostgresDBotDao implements IDBotDao {
+	public addMessageActivity(message: MessageActivity, callback: IAddRecordCallback): void {
 		DB.postgres.connect()
 			.then((client: PoolClient) => {
 				client.query(addMessageSql, [message.content, message.channel, message.username])
@@ -25,7 +25,7 @@ export default class PostgresDBotDao implements DBotDao {
 			});
 	}
 
-	public addVoiceActivity(activity: VoiceActivity, callback: AddRecordCallback): void {
+	public addVoiceActivity(activity: VoiceActivity, callback: IAddRecordCallback): void {
 		DB.postgres.connect()
 			.then((client: PoolClient) => {
 				client.query(addVoiceActivitySql, [activity.username, activity.channel, activity.event])
@@ -41,7 +41,7 @@ export default class PostgresDBotDao implements DBotDao {
 			});
 	}
 
-	public getAllMessages(callback: RecordsCallback<MessageActivity>): void {
+	public getAllMessages(callback: IRecordsCallback<MessageActivity>): void {
 		DB.postgres.connect()
 			.then((client: PoolClient) => {
 				client.query(getAllMessagesSql, [])
@@ -66,7 +66,7 @@ export default class PostgresDBotDao implements DBotDao {
 			});
 	}
 
-	public getAllVoiceActivities(callback: RecordsCallback<VoiceActivity>) {
+	public getAllVoiceActivities(callback: IRecordsCallback<VoiceActivity>) {
 		DB.postgres.connect()
 			.then((client: PoolClient) => {
 				client.query(getAllVoiceActivitiesSql, [])

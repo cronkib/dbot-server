@@ -11,19 +11,19 @@ export default class DiscordConnector {
 		this.client = new Discord.Client();
 	}
 
-	connect() {
+	public connect() {
 		this.client.login(this.token);
 		this.listenForMessages();
 		this.listenForVoiceChanges();
 		return this;
 	}
 
-	onMessageReceived(handler: MessageHandler) {
+	public onMessageReceived(handler: MessageHandler) {
 		this.messageHandler = handler;
 		return this;
 	}
 
-	onVoiceActivityChanged(handler: VoiceEventHandler) {
+	public onVoiceActivityChanged(handler: VoiceEventHandler) {
 		this.voiceEventHandler = handler;
 		return this;
 	}

@@ -1,8 +1,7 @@
-import DBotService from "../service/DBotService";
-import ExpressController from "./ExpressController";
-import { MessageActivity, VoiceActivity } from "../domain/ActivityModels";
 import express from "express";
-import { Message } from "discord.js";
+import { MessageActivity, VoiceActivity } from "../domain/ActivityModels";
+import DBotService from "../service/IDBotService";
+import ExpressController from "./ExpressController";
 
 export default class DBotController extends ExpressController {
 	constructor(private dbotService: DBotService) {

@@ -1,7 +1,5 @@
 export default class ResponseSender {
-	response: Response;
-
-	constructor(response: Response) {
+	constructor(private response: Response) {
 		this.response = response;
 	}
 }

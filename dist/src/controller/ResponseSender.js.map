@@ -1,1 +1,1 @@
-{"version":3,"file":"ResponseSender.js","sourceRoot":"","sources":["../../../src/controller/ResponseSender.ts"],"names":[],"mappings":";;AAAA,MAAqB,cAAc;IAGlC,YAAY,QAAkB;QAC7B,IAAI,CAAC,QAAQ,GAAG,QAAQ,CAAC;IAC1B,CAAC;CACD;AAND,iCAMC"}
+{"version":3,"file":"ResponseSender.js","sourceRoot":"","sources":["../../../src/controller/ResponseSender.ts"],"names":[],"mappings":";;AAAA,MAAqB,cAAc;IAClC,YAAoB,QAAkB;QAAlB,aAAQ,GAAR,QAAQ,CAAU;QACrC,IAAI,CAAC,QAAQ,GAAG,QAAQ,CAAC;IAC1B,CAAC;CACD;AAJD,iCAIC"}
