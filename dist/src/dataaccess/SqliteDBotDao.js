@@ -55,6 +55,12 @@ class SqliteDBotDao {
             }, callback));
         });
     }
+    getChannelMessageCounts(callback) {
+        throw new Error("Method not implemented.");
+    }
+    getChannelConnectionCounts(callback) {
+        throw new Error("Method not implemented.");
+    }
 }
 exports.default = SqliteDBotDao;
 //# sourceMappingURL=SqliteDBotDao.js.map

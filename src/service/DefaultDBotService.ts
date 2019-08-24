@@ -1,6 +1,6 @@
 import { IAddRecordCallback, IRecordsCallback } from "../dataaccess/IDBotDao";
 import IDBotDao from "../dataaccess/IDBotDao";
-import { MessageActivity, VoiceActivity } from "../domain/ActivityModels";
+import { ChannelCount, MessageActivity, VoiceActivity } from "../domain/ActivityModels";
 import IDBotService from "./IDBotService";
 
 export default class DefaultDBotService implements IDBotService {
@@ -20,5 +20,13 @@ export default class DefaultDBotService implements IDBotService {
 
 	public getAllVoiceActivities(callback: IRecordsCallback<VoiceActivity>): void {
 		this.dbotDao.getAllVoiceActivities(callback);
+	}
+
+	public getChannelMessageCounts(callback: IRecordsCallback<ChannelCount>) {
+		this.dbotDao.getChannelMessageCounts(callback);
+	}
+
+	public getChannelConnectionCounts(callback: IRecordsCallback<ChannelCount>) {
+		this.dbotDao.getChannelConnectionCounts(callback);
 	}
 }

@@ -1,5 +1,5 @@
 import { DB } from "../Database";
-import { MessageActivity, VoiceActivity } from "../domain/ActivityModels";
+import { ChannelCount, MessageActivity, VoiceActivity } from "../domain/ActivityModels";
 import IDBotDao, { AdaptAddRecordCallback, AdaptRowMapping, IAddRecordCallback, IRecordsCallback } from "./IDBotDao";
 
 const addMessageSql = " insert into message_activity_log ( content, channel, username ) values ( ?, ?, ? ) ";
@@ -59,5 +59,13 @@ export default class SqliteDBotDao implements IDBotDao {
 				});
 			}, callback));
 		});
+	}
+
+	public getChannelMessageCounts(callback: IRecordsCallback<ChannelCount>) {
+		throw new Error("Method not implemented.");
+	}
+
+	public getChannelConnectionCounts(callback: IRecordsCallback<ChannelCount>) {
+		throw new Error("Method not implemented.");
 	}
 }

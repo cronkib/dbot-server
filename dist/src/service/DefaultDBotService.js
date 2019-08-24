@@ -16,6 +16,12 @@ class DefaultDBotService {
     getAllVoiceActivities(callback) {
         this.dbotDao.getAllVoiceActivities(callback);
     }
+    getChannelMessageCounts(callback) {
+        this.dbotDao.getChannelMessageCounts(callback);
+    }
+    getChannelConnectionCounts(callback) {
+        this.dbotDao.getChannelConnectionCounts(callback);
+    }
 }
 exports.default = DefaultDBotService;
 //# sourceMappingURL=DefaultDBotService.js.map

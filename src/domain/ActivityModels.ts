@@ -1,17 +1,23 @@
 export interface MessageActivity {
-	id?: number,
-	content: string,
-	channel: string,
-	username: string,
-	timestamp: Date
+	id?: number;
+	content: string;
+	channel: string;
+	username: string;
+	timestamp: Date;
 }
 
 export interface VoiceActivity {
-	id?: number,
-	username: string,
-	event: string,
-	channel: string,
-	timestamp: Date
+	id?: number;
+	username: string;
+	event: string;
+	channel: string;
+	timestamp: Date;
+}
+
+export interface ChannelCount {
+	channel: string;
+	count: number;
+	lastMessage: Date;
 }
 
 export interface MessageHandler {

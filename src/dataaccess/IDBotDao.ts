@@ -1,11 +1,13 @@
 import { RunResult } from "sqlite3";
-import { MessageActivity, VoiceActivity } from "../domain/ActivityModels";
+import { ChannelCount, MessageActivity, VoiceActivity } from "../domain/ActivityModels";
 
 export default interface IDBotDao {
 	addMessageActivity(message: MessageActivity, callback: IAddRecordCallback): void;
 	addVoiceActivity(activity: VoiceActivity, callback: IAddRecordCallback): void;
 	getAllMessages(callback: IRecordsCallback<MessageActivity>): void;
 	getAllVoiceActivities(callback: IRecordsCallback<VoiceActivity>);
+	getChannelMessageCounts(callback: IRecordsCallback<ChannelCount>);
+	getChannelConnectionCounts(callback: IRecordsCallback<ChannelCount>);
 }
 
 export interface IAddRecordCallback {
@@ -34,7 +36,7 @@ export function AdaptRowMapping<T>(mapper: (rows: any[]) => T[], callback: IReco
 			return callback.onError(error);
 		}
 
-		let mappedRecords = mapper(rows);
+		const mappedRecords = mapper(rows);
 		callback.onData(mappedRecords);
 	};
 }

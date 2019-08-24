@@ -14,7 +14,7 @@ function AdaptRowMapping(mapper, callback) {
         if (error) {
             return callback.onError(error);
         }
-        let mappedRecords = mapper(rows);
+        const mappedRecords = mapper(rows);
         callback.onData(mappedRecords);
     };
 }
