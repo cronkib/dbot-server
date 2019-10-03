@@ -1,10 +1,10 @@
 {
-	"discordToken": "NTY5MzM2MjIzOTcwMjMwMjg4.XLvMqg.CbxYNY1IUtpUHmpy-huxG0hoOrg",
+	"discordToken": "PUT_SECRET_HERE",
 	"port": 3000,
 	"database": {
 		"type": "postgresql",
 		"user": "dbot",
-		"host": "forge",
+		"host": "PUT_HOST_HERE",
 		"database": "dbot",
 		"password": "dbot",
 		"port": 5432,
